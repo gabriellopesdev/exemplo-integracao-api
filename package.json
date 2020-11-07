@@ -1,0 +1,27 @@
+{
+  "name": "teste-backend-linkapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/server.js --ignore-watch ./node_modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabriellopesdev/teste-backend-linkapi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabriellopesdev/teste-backend-linkapi/issues"
+  },
+  "homepage": "https://github.com/gabriellopesdev/teste-backend-linkapi#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.13"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
