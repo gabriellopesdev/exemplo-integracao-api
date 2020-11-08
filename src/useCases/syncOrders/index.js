@@ -11,12 +11,14 @@ async function syncOrders() {
             pipeOrders.map(async (pipeOrder) => {
                 const parsedPipeOrder =  { 
                     id: pipeOrder.id, 
+                    customer: order.person_id.name,
                     date: pipeOrder.won_time, 
                     order_value: pipeOrder.value 
                 }
                 await Order.findOneAndUpdate({ id_pipedrive: pipeOrder.id }, 
                                         parsedPipeOrder, 
-                                        { upsert: true, rawResult:true}, async function(err, feedback) {
+                                        { upsert: true, rawResult:true }, async function(err, feedback) {
+                                            if (err) return 
                                             if(!feedback.lastErrorObject.updatedExisting) {
                                                 await bling.createOrder(pipeOrder)
                                             }
