@@ -10,15 +10,9 @@ class Pipedrive {
     }
 
     async getDeals() {
-        const result = await this.api.get('deals?status=won&start=0&api_token=' + this.key)
-        
-        const parsedResult = result.data.data.map((deal) => {
-            return { id: deal.id, date: deal.won_time, order_value: deal.value }
-        })
-        return parsedResult
+        const result = await this.api.get('deals?status=won&start=0&api_token=' + this.key)        
+        return result.data.data
     }
-
-
 }
 
 module.exports = Pipedrive
