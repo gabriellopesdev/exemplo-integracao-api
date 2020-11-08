@@ -7,14 +7,20 @@ async function syncOrders() {
     const bling = new Bling()
     try {
         const pipeOrders = await pipedrive.getDeals()
+        const resultPipeOrders = []
         await Promise.all(
             pipeOrders.map(async (pipeOrder) => {
+                const orderDate = new Date(pipeOrder.won_time)
+                const formatedDate = orderDate.getFullYear() + '-' + 
+                                     orderDate.getMonth() + '-' +
+                                     orderDate.getDate()
                 const parsedPipeOrder =  { 
                     id: pipeOrder.id, 
-                    customer: order.person_id.name,
-                    date: pipeOrder.won_time, 
+                    customer: pipeOrder.person_id.name,
+                    date: formatedDate, 
                     order_value: pipeOrder.value 
                 }
+                resultPipeOrders.push(parsedPipeOrder)
                 await Order.findOneAndUpdate({ id_pipedrive: pipeOrder.id }, 
                                         parsedPipeOrder, 
                                         { upsert: true, rawResult:true }, async function(err, feedback) {
@@ -25,14 +31,7 @@ async function syncOrders() {
                                         })
             })
         ) 
-        return pipeOrders.map((order) => {
-            return { 
-                id: order.id, 
-                customer: order.person_id.name,
-                date: order.won_time, 
-                order_value: order.value 
-            }
-        })
+        return resultPipeOrders
     } catch (error) {
         return { erro: 'An error ocurred. Try again ' + error }
         
