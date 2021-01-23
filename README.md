@@ -1,4 +1,6 @@
-## Teste Técnico - Back-end - Linkapi
+## Exemplo integração
+
+Projeto de exemplo de integração entre prospecção no Pipedrive para geração de pedidos na plataforma Bling
 
 API escrita com a NodeJS + Express + MongoDB.
 
